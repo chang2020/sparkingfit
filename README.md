@@ -51,7 +51,7 @@ Anaconda install for Mac, use command line.
 
 
 1. Install the prerequisites if you have not already done so.
-
+Spark runs on Java 8+, Python 2.7+, R 3.1+ and Scala 2.11
 
 
 
@@ -72,16 +72,22 @@ Follow the setup below:
 
 Windows Setup
 Set Environment Variables (for Windows 10 see notes)
-Control Panel > System and Security > System >Advanced system settings
-> Environment Variables System variables
+Control Panel > System and Security > System >Advanced system settings > Environment Variables System variables
+
 Add (use the correct paths on your computer) HADOOP_HOME
+
 C:\winutils
+
 JAVA_HOME (Important for 2.1.1 use Progra~1) C:\Progra~1\Java\jdk1.8.0_131
+
 PYTHONPATH C:\Python27;C:\Python27\Scripts;
+
 SPARK_HOME C:\apache\spark-2.1.1-bin-hadoop2.7
+
 add to PATH
-C:\Python27;%JAVA_HOME%\bin
-;C:\Program Files\R\R-3.3.3\bin;%HADOOP_HOME% ;%SPARK_HOME%\bin;
+
+C:\Python27;%JAVA_HOME%\bin;C:\Program Files\R\R-3.3.3\bin;%HADOOP_HOME% ;%SPARK_HOME%\bin;
+
 then restart
 
 Hadoop 2.7 does not include the required binaries (like winutils.exe) which are required to run Hadoop.
@@ -110,11 +116,17 @@ Mac OS Setup
 Homebrew
 The best way to install the latest version of Apache Spark on OS X and to keep it up to date is via Homebrew.
 First install Homebrew, if you don’t have it:
+
 ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
 Set JAVA_HOME (if not already set)
+
 export JAVA_HOME=$(/usr/libexec/java_home)
+
 Then install Spark with brew:
+
 brew install apache-spark
+
 This will install Spark to directory:
      /usr/local/Cellar/apache-spark/2.1.1/
 All relevant paths were added automatically to your environment by Homebrew.
