@@ -31,6 +31,17 @@ http://www.7-zip.org/
 
 Download R
 https://www.r-project.org/
+doop 2.7 does not include the required binaries (like winutils.exe) which are required to run Hadoop.
+Winutils provide basic command line utilities for Hadoop on Windows.
+Remember, Spark is a engine built over Hadoop.
+Copy winutilities.exe from the student files to c:\winutils\bin
+Create c:\TEMP\hive
+Open a command prompt as administrator and type:
+c:\winutils\bin>winutils.exe chmod 777 /temp/hive
+This prevents the following error:
+java.lang.RuntimeException: java.lang.RuntimeException: The root scratch dir: /tmp/hive on HDFS should be writable.
+For Help:
+C:\winutils\bin>winutils -help
 
 Anaconda is a free Python distribution from Continuum Analytics.
 Download at:
@@ -57,24 +68,117 @@ Download Spark: spark-2.1.1-bin-hadoop2.7.tgz
 3. For Windows
 The winutils file is in your student files. Place it in C:\winutils
 
-Follow the setup on pages 39 - 41.
+Follow the setup below:
 
+Windows Setup
+Set Environment Variables (for Windows 10 see notes)
+Control Panel > System and Security > System >Advanced system settings
+> Environment Variables System variables
+Add (use the correct paths on your computer) HADOOP_HOME
+C:\winutils
+JAVA_HOME (Important for 2.1.1 use Progra~1) C:\Progra~1\Java\jdk1.8.0_131
+PYTHONPATH C:\Python27;C:\Python27\Scripts;
+SPARK_HOME C:\apache\spark-2.1.1-bin-hadoop2.7
+add to PATH
+C:\Python27;%JAVA_HOME%\bin
+;C:\Program Files\R\R-3.3.3\bin;%HADOOP_HOME% ;%SPARK_HOME%\bin;
+then restart
+
+Hadoop 2.7 does not include the required binaries (like winutils.exe) which are required to run Hadoop.
+Winutils provide basic command line utilities for Hadoop on Windows.
+Remember, Spark is a engine built over Hadoop.
+Copy winutilities.exe from the student files to c:\winutils\bin
+Create c:\TEMP\hive
+Open a command prompt as administrator and type:
+c:\winutils\bin>winutils.exe chmod 777 /temp/hive
+This prevents the following error:
+java.lang.RuntimeException: java.lang.RuntimeException: The root scratch dir: /tmp/hive on HDFS should be writable.
+For Help:
+C:\winutils\bin>winutils -help
+
+Download spark-2.1.1-bin-hadoop2.7.tgz
+Highlight spark-2.1.1-bin-hadoop2.7.tgz, right-click and choose 7-zip
+Highlight spark-2.1.1-bin-hadoop2.7.tar, right-click and choose 7-zip
 
 4. For MAC
 The best way to install the latest version of Apache Spark on
 OS X and to keep it up to date is via Homebrew.
 
-Follow the setup on pages 42 - 43.
+Follow the setup below:
+
+Mac OS Setup
+Homebrew
+The best way to install the latest version of Apache Spark on OS X and to keep it up to date is via Homebrew.
+First install Homebrew, if you don’t have it:
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+Set JAVA_HOME (if not already set)
+export JAVA_HOME=$(/usr/libexec/java_home)
+Then install Spark with brew:
+brew install apache-spark
+This will install Spark to directory:
+     /usr/local/Cellar/apache-spark/2.1.1/
+All relevant paths were added automatically to your environment by Homebrew.
+Sample Brew Commands:
+$ brew update $ brew list
+$ brew info apache-spark
+$ brew install apache-spark
+$ brew switch <formula> <version> $ brew switch apache-spark 2.1.1 $ brew switch apache-spark 0
+$ brew upgrade
+$ brew uninstall apache-spark
+
 
 
 5. For Linux
-Follow the setup on page 44.
+Follow the setup below:
+Check the Java version
+$ java -version
+Install Scala
+$ wget http://www.scala-lang.org/files/archive/scala-2.11.tgz $ sudo mkdir /usr/local/src/scala
+$ sudo tar xvf scala-2.11.tgz -C /usr/local/src/scala/
+$ vi .bashrc
+And add following to the end of the file
+export SCALA_HOME=/usr/local/src/scala/scala-2.11 export PATH=$SCALA_HOME/bin:$PATH
+restart bashrc Installing Spark
+Download the Spark Pre-built for Hadoop 2.7 and later Then
+tar -xvzf spark-2.1.1-bin-hadoop2.7.tgz
+You can move that to wherever you like.
+
+Linux Packages
+RHEL-compatible system:
+To install all Spark packages:
+$ sudo yum install spark-core spark-master spark-worker spark-history-server spark-python
+To install only the packages needed to run Spark on YARN:
+$ sudo yum install spark-core spark-history-server spark-python
+SLES system:
+To install all Spark packages:
+$ sudo zypper install spark-core spark-master spark-worker spark-history-server spark-python
+To install only the packages needed to run Spark on YARN:
+$ sudo zypper install spark-core spark-history-server spark-python
+Ubuntu or Debian system:
+To install all Spark packages:
+$ sudo apt-get install spark-core spark-master spark-worker spark-history-server spark-python
+To install only the packages needed to run Spark on YARN:
+$ sudo apt-get install spark-core spark-history-server spark-python
 
 
 
 6. To test your install, start your spark-shell.
 
 
+$spark-shell
+
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /___/ .__/\_,_/_/ /_/\_\   version 2.1.1
+      /_/
+
+Using Scala version 2.11.8 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_111)
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala>
 
 7. At the command line, enter println("Hello Spark")
 
